@@ -1,6 +1,5 @@
-  directive @upper on FIELD_DEFINITION
-
-  type User {
+export default `
+type User {
     id: ID!
     name: String!
     email: String!
@@ -17,7 +16,7 @@
 
 
   type Query {
-    users(page: Int, limit: Int, search: String, orderBy: String): [ User! ]!
+    users(page: Int, limit: Int, search: String, orderBy: String): [User] @auth
     user: User!
   }
 
@@ -27,3 +26,4 @@
     updateUser(id: ID!, input: UserInput): User
     deleteUser(id: ID!): Boolean
   }
+  `;

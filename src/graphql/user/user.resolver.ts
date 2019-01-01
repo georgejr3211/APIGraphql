@@ -6,6 +6,9 @@ export default {
 
   Query: {
     users: async (parent, args, context) => {
+
+      console.log('oi');
+
       const users = await User.find();
       return users;
     },

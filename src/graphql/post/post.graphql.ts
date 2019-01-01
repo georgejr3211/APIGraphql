@@ -1,3 +1,4 @@
+export default `
 directive @auth on FIELD_DEFINITION
 
 type Post {
@@ -9,3 +10,4 @@ type Post {
 type Query {
   posts: String @auth
 }
+`
