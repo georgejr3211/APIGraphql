@@ -10,7 +10,6 @@ export function userAuthenticate() {
     const token: string = authorization ? authorization : undefined;
 
     req['context'] = {};
-    req['context']['authorization'] = token;
 
     if (!token) {
       return next();
@@ -18,13 +17,14 @@ export function userAuthenticate() {
 
     jwt.verify(token, KEY_SECRET, async (err, decoded: any) => {
 
-      const userDecoded = decoded.user;
       if (err) { return next(); }
+
+      const userDecoded = decoded.user;
 
       const findUser = await User.findOne(userDecoded.id);
 
       if (findUser) {
-        req['context']['user'] = findUser;
+        req['context']['token'] = findUser;
       }
 
       return next();

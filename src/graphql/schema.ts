@@ -16,19 +16,27 @@ const resolversArray = fileLoader(__dirname + '/**/*.resolver.*', {
 export const typeDefs = mergeTypes(typesArray);
 export const resolvers = mergeResolvers(resolversArray);
 
-class UpperCaseDirective extends SchemaDirectiveVisitor {
+class AuthDirective extends SchemaDirectiveVisitor {
+
   visitFieldDefinition(field) {
     field.resolve = (...args) => {
-      const [, , ctx] = args;
+      const [, , auth] = args;
+
+      const size = Object.keys(auth).length;
+
+      if (!size) {
+        throw new Error('Sem autorização, token inválido ou expirado. É necessário informar um token para ter acesso!');
+      }
 
     }
   }
+
 }
 
 export default makeExecutableSchema({
   typeDefs,
   resolvers,
   schemaDirectives: {
-    upper: UpperCaseDirective
+    auth: AuthDirective
   }
 });

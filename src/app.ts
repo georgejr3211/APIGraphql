@@ -22,7 +22,6 @@ class App {
 
       graphqlHTTP((req) => ({
         schema: schema,
-        // rootValue: resolvers,
         graphiql: process.env.NODE_ENV === 'development',
         context: req['context']
       }))

@@ -20,13 +20,16 @@ export default {
         .andWhere('password = :password', { password })
         .getOne();
 
-      return jwt.sign({ user }, KEY_SECRET, { expiresIn: '3h' });
+      let token;
+      if (user) {
+        token = jwt.sign({ user }, KEY_SECRET, { expiresIn: '3h' });
+      }
+
+      return token;
 
     },
 
     createUser: async (parent, { input }, { user }, info) => {
-
-      console.log(input.email);
 
       const emailVerify = await User
         .createQueryBuilder('user')
