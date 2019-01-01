@@ -1,0 +1,16 @@
+# directive @deprecated(
+#   reason: String = "No longer supported"
+# ) on FIELD_DEFINITION | ENUM_VALUE
+
+directive @authentication on FIELD_DEFINITION
+directive @upper on FIELD_DEFINITION
+
+type Post {
+  id: ID
+  title: String
+  text: String
+}
+
+type Query {
+  posts: String @upper
+}

@@ -1,0 +1,1 @@
+export const KEY_SECRET = '70191031';
